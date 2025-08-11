@@ -1,0 +1,28 @@
+/* Disable transitions during drag operations to prevent jumpy effects */
+.react-beautiful-dnd-dragging *,
+.react-beautiful-dnd-drag-handle *,
+[data-rbd-draggable-context-id] *,
+[data-rbd-droppable-context-id] * {
+  transition: none !important;
+  animation: none !important;
+  transform-origin: center !important;
+}
+
+/* Ensure smooth dragging experience */
+[data-rbd-draggable-id] {
+  transition: none !important;
+}
+
+[data-rbd-droppable-id] {
+  transition: none !important;
+}
+
+/* Prevent layout shifts during drag */
+.react-beautiful-dnd-dragging {
+  pointer-events: none;
+}
+
+/* Smooth placeholder transitions */
+[data-rbd-placeholder-context-id] {
+  transition: none !important;
+}
