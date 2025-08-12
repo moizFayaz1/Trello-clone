@@ -15,9 +15,16 @@ t {
 } */
 
 
-.board, .list, .overlay{
+.board, .list, .overlay, .account-panel, .scroll-styles {
   scrollbar-color: #afa7a1 rgba(255, 255, 255, 0.2);
   scrollbar-width: thin;
+}
+
+.account-panel {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  max-height: 90vh;
 }
 
 .trello-logo {

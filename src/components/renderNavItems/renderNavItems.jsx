@@ -1,11 +1,11 @@
-import { NAVIGATION_ITEMS } from "@/data/NavItemsList";
+import { SIDE_NAVIGATION_ITEMS } from "@/data/NavItemsList";
 import { NavItem } from "../NavItem/NavItem";
 import { useState } from "react";
 
 export const RenderNavItems = () => {
   const [activeItem, setActiveItem] = useState("boards"); 
 
-  return NAVIGATION_ITEMS.map((item) => (
+  return SIDE_NAVIGATION_ITEMS.map((item) => (
     <NavItem
       key={item.id}
       icon={

@@ -26,12 +26,14 @@ const Dashboard = () => {
     dispatch(getBoards());
   }, [dispatch]);
 
+  const NewModalBtnClasses = `bg-[#A1BDD914] mb-15 h-24 w-40 px-2 py-4 flex flex-col justify-center items-center gap-1 hover:opacity-100 opacity-80  transition-opacity rounded-lg cursor-pointer `;
+
   return (
     <div className="flex-1 flex flex-col px-6 py-6">
       <SectionTitle icon={ShieldUser}>Private Boards</SectionTitle>
       {privateBoards?.length < 0 ? (
         <div
-          className="bg-[#A1BDD914] mb-15 h-24 w-40 px-2 py-4 flex flex-col justify-center items-center gap-1 hover:opacity-100 opacity-80  transition-opacity rounded-lg cursor-pointer "
+          className={NewModalBtnClasses}
           onClick={() => {
             openModal("createBoard");
             dispatch(setOpenedFrom("dashboard"));
@@ -52,7 +54,7 @@ const Dashboard = () => {
         <SectionTitle>YOUR WORKSPACES</SectionTitle>
         {workspaceBoards?.length < 0 ? (
           <div
-            className="bg-[#A1BDD914] mb-15 h-24 w-40 px-2 py-4 flex flex-col justify-center items-center gap-1 hover:opacity-100 opacity-80  transition-opacity rounded-lg cursor-pointer "
+            className={NewModalBtnClasses}
             onClick={() => {
               openModal("createBoard");
               dispatch(setOpenedFrom("dashboard"));
@@ -67,6 +69,16 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+       <div
+          className={`${NewModalBtnClasses} mt-4`}
+          onClick={() => {
+            openModal("createBoard");
+            dispatch(setOpenedFrom("dashboard"));
+          }}
+        >
+          <p className="text-sm text-white/70">Create New Board</p>
+          <p className="text-xs text-whilte/70">10 remaining</p>
+        </div>
     </div>
   );
 };

@@ -31,6 +31,7 @@ import { db } from "@/config/db";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import { navigateToBoard } from "@/utils/navigation";
+import { WISIBLITY_OPTIONS } from "@/data/WorkspaceItems";
 
 // Form validation schema
 const boardFormSchema = z.object({
@@ -87,7 +88,7 @@ const BoardCreation = ({ onClose, ImageBgUrl, boardColorBg }) => {
       // toast.success("Board created successfully!");
       form.reset();
       await navigateToBoard(navigate, newBoard);
-      toast.success("Board Created Succesfully! Time To Make Life Easy.")
+      toast.success("Board Created Succesfully! Time To Make Life Easy.");
       onClose();
     } catch (err) {
       console.error("Failed to create board:", err);
@@ -95,43 +96,16 @@ const BoardCreation = ({ onClose, ImageBgUrl, boardColorBg }) => {
     }
   };
 
-  // Handle error display
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //   }
-  // }, [error]);
-
-  // Visibility options configuration
-  const visibilityOptions = [
-    {
-      value: "private",
-      label: "Private",
-      icon: LockKeyhole,
-      description:
-        "Only board members can see this board. Workspace admins can close the board or remove members.",
-    },
-    {
-      value: "workspace",
-      label: "Workspace",
-      icon: UsersRound,
-      description:
-        "All members of the Team Co. Workspace can see and edit this board.",
-      isSelected: true,
-    },
-    {
-      value: "public",
-      label: "Public",
-      icon: Earth,
-      description:
-        "Anyone on the internet can see it. Only workspace members can edit.",
-    },
-  ];
-
   const selectedVisibility = form.watch("visibility");
-  const selectedOption = visibilityOptions.find(
+  const selectedOption = WISIBLITY_OPTIONS.find(
     (option) => option.value === selectedVisibility
   );
+
+  const visibilityDropdownTriggerClass = `w-full px-3 py-2 cursor-pointer  bg-slate-700 border border-slate-600 rounded text-slate-200 text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between`;
+
+  const DropDownOptionsContainer = `absolute top-full left-0 right-0 mt-2 bg-[#282E33] border border-slate-600 rounded-lg shadow-lg z-50 flex flex-col overflow-y-auto scroll-styles select-none max-h-[200px] transition-colors`;
+
+  const DropDownOptionsClasses = `px-3 py-3 border-l-2 border-transparent cursor-pointer flex items-start space-x-3`;
 
   return (
     <div className="space-y-6">
@@ -174,7 +148,7 @@ const BoardCreation = ({ onClose, ImageBgUrl, boardColorBg }) => {
                     <button
                       type="button"
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                      className="w-full px-3 py-2 cursor-pointer  bg-slate-700 border border-slate-600 rounded text-slate-200 text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-between"
+                      className={visibilityDropdownTriggerClass}
                       disabled={loading}
                     >
                       <div className="flex items-center space-x-3">
@@ -196,8 +170,8 @@ const BoardCreation = ({ onClose, ImageBgUrl, boardColorBg }) => {
                     </button>
 
                     {isDropdownOpen && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-[#282E33] border border-slate-600 rounded-lg shadow-lg z-50 flex flex-col overflow-y-auto select-none max-h-[200px]">
-                        {visibilityOptions.map((option) => {
+                      <div className={DropDownOptionsContainer}>
+                        {WISIBLITY_OPTIONS.map((option) => {
                           const IconComponent = option.icon;
                           return (
                             <div
@@ -206,10 +180,10 @@ const BoardCreation = ({ onClose, ImageBgUrl, boardColorBg }) => {
                                 field.onChange(option.value);
                                 setIsDropdownOpen(false);
                               }}
-                              className={`px-3 py-3 border-l-2 cursor-pointer flex items-start space-x-3 ${
+                              className={` ${DropDownOptionsClasses} ${
                                 option.value === selectedVisibility
-                                  ? "bg-[#1C2B41] text-[#579DFF] border-l-2 border-[#579DFF]"
-                                  : "hover:bg-slate-600 hover:border-l-2 hover:border-[#579DFF]"
+                                  ? "bg-[#1C2B41] text-[#579DFF] border-l-2 !border-[#579DFF]"
+                                  : "hover:bg-slate-600 hover:border-l-2 hover:!border-[#579DFF]"
                               }`}
                             >
                               <div className="mt-0.5 self-center">

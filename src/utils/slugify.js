@@ -4,3 +4,10 @@ export const slugify = (name) => {
     .trim()
     .replace(/[\s\W-]+/g, "-");
 };
+
+export const userSlug = (name) => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\W-]+/g, "");
+};

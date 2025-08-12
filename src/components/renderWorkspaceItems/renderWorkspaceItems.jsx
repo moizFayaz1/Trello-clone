@@ -1,4 +1,5 @@
-import { WORKSPACE_ITEMS } from "@/data/WorkspaceItemsList";
+
+import { WORKSPACE_ITEMS } from "@/data/WorkspaceItems";
 import { NavItem } from "../NavItem/NavItem";
 
 export const renderWorkspaceItems = () =>

@@ -12,7 +12,7 @@ export const BoardCard = ({ title, bgImage, bgColor, onClick }) => (
       }
     ></div>
     <div
-      className="px-2 py-3 bg-[#1d2125] -mt-4 rounded-b-lg shadow-[0_8px_30px_rgba(0,0,0,0.3)]
+      className="px-2 py-2 bg-[#1d2125] h-15 -mt-4 rounded-b-lg shadow-[0_8px_30px_rgba(0,0,0,0.3)]
  "
     >
       <div className="text-sm font-[400] text-left">{title}</div>
