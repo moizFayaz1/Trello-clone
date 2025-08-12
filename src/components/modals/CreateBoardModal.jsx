@@ -74,7 +74,7 @@ const CreateBoardModal = ({ isOpen, onClose, onSelect }) => {
               backgrounds={backgrounds}
               onSelect={onSelect}
               selectedBackground={selectedBackground}
-              onOpenBackgrounds={handleModalFlow.openBackgrounds}
+              isOpen={handleModalFlow.openBackgrounds}
               variant="default"
             />
           </div>
@@ -98,11 +98,11 @@ const CreateBoardModal = ({ isOpen, onClose, onSelect }) => {
         </div>
       </BaseModal>
       <LimitedBackgroundsModal
-        isBackgroundsOpen={modalState.limitedBackgrounds}
+        isOpen={modalState.limitedBackgrounds}
         backgrounds={backgrounds}
         selectedBackground={selectedBackground}
         onSelect={onSelect}
-        showAllBackgrounds={handleModalFlow.showAllBackgrounds}
+        openModal={handleModalFlow.showAllBackgrounds}
         closeModal={closeModal}
       />
       <AllBackgroundsModal
@@ -110,9 +110,9 @@ const CreateBoardModal = ({ isOpen, onClose, onSelect }) => {
         loading={loading}
         backgrounds={backgrounds}
         selectedBackground={selectedBackground}
-        onReturntoLimitedBackgrounds={handleModalFlow.backToLimitedBackgrounds}
-        isAllBackgroundsOpen={modalState.allBackgrounds}
-        closeAllBackgrounds={handleModalFlow.backToCreateBoard}
+        onGoBack={handleModalFlow.backToLimitedBackgrounds}
+        isOpen={modalState.allBackgrounds}
+        closeModal={handleModalFlow.backToCreateBoard}
       />
     </div>
   );

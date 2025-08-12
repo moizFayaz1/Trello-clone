@@ -1,11 +1,16 @@
 import { db } from "@/config/db";
+import { getCurrentUser } from "@/services/auth.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getBoards = createAsyncThunk(
   "boards/getBoards",
   async (_, { rejectWithValue }) => {
     try {
-      const boards = await db.boards.toArray();
+      const currentUser = getCurrentUser();
+      const boards = await db.boards
+        .where("owner_id")
+        .equals(currentUser.id)
+        .toArray();
       return boards;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -7,7 +7,7 @@ const BaseModal = ({
   children,
   isBackgroundsOpen,
   isAllBackgroundsOpen,
-  onReturntoLimited,
+  onGoBack,
   title,
   backBtn = false,
 }) => {
@@ -18,8 +18,16 @@ const BaseModal = ({
         <>
           <div className="flex items-center justify-between py-3 px-2 flex-shrink-0">
             {backBtn && (
-              <button className="text-slate-400 hover:bg-gray-500 p-2 cursor-pointer rounded" onClick={onReturntoLimited}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <button
+                className="text-slate-400 hover:bg-gray-500 p-2 cursor-pointer rounded"
+                onClick={onGoBack}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
                   <path d="M8 2L2 8l6 6 1.414-1.414L5.828 9H14V7H5.828l3.586-3.586L8 2z" />
                 </svg>
               </button>

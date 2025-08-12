@@ -10,7 +10,7 @@ const BackgroundGrid = ({
   backgrounds,
   onSelect,
   selectedBackground,
-  onOpenBackgrounds,
+  isOpen,
   showAllBackgrounds,
   variant = "default",
   customConfig = {},
@@ -28,7 +28,6 @@ const BackgroundGrid = ({
     showMore,
     ImageBgHeight,
     ColorBgheight,
-
   } = config;
 
   const gridClasses = {
@@ -43,7 +42,10 @@ const BackgroundGrid = ({
       {variant === "compact" && (
         <div className="flex justify-between items-center mb-1">
           <p className="text-sm font-semibold">Photo</p>
-          <button className="px-2 h-9 rounded  font-semibold  bg-blue-200/10 hover:bg-gray-600 transition-all cursor-pointer" onClick={showAllBackgrounds}>
+          <button
+            className="px-2 h-9 rounded  font-semibold  bg-blue-200/10 hover:bg-gray-600 transition-all cursor-pointer"
+            onClick={showAllBackgrounds}
+          >
             view more
           </button>
         </div>
@@ -68,7 +70,10 @@ const BackgroundGrid = ({
       {variant === "compact" && (
         <div className="flex justify-between items-center mb-1 mt-4">
           <p className="text-sm font-semibold">Colors</p>
-          <button className="px-2 font-semibold h-9 rounded   bg-blue-200/10 hover:bg-gray-600 transition-all cursor-pointer" onClick={showAllBackgrounds}>
+          <button
+            className="px-2 font-semibold h-9 rounded   bg-blue-200/10 hover:bg-gray-600 transition-all cursor-pointer"
+            onClick={showAllBackgrounds}
+          >
             view more
           </button>
         </div>
@@ -91,7 +96,7 @@ const BackgroundGrid = ({
         {showMore && (
           <button
             className="w-full h-8 rounded border-2 cursor-pointer border-transparent bg-slate-700 flex items-center justify-center text-slate-400 hover:bg-slate-600 transition-all"
-            onClick={onOpenBackgrounds}
+            onClick={isOpen}
           >
             <Ellipsis className="w-4 h-4" />
           </button>

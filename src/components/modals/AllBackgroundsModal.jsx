@@ -1,18 +1,18 @@
-import DESIGN_TOKENS from "@/styles/tokens";
-import BaseModal from "./BaseModal";
-import { Search } from "lucide-react";
-import ImageBackgroundItem from "./ImageBackgroundItem";
-import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { fetchUnsplashBackgrounds } from "@/features/unsplash/unsplashThunk";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll";
+import ImageBackgroundItem from "./ImageBackgroundItem";
+import { useCallback, useState } from "react";
+import DESIGN_TOKENS from "@/styles/tokens";
 import { SyncLoader } from "react-spinners";
+import { useDispatch } from "react-redux";
+import { Search } from "lucide-react";
+import BaseModal from "./BaseModal";
 
 const AllBackgroundsModal = ({
-  isAllBackgroundsOpen,
-  closeAllBackgrounds,
+  isOpen,
+  closeModal,
   selectedBackground,
-  onReturntoLimitedBackgrounds,
+  onGoBack,
   backgrounds,
   loading,
   onSelect,
@@ -38,17 +38,24 @@ const AllBackgroundsModal = ({
     internalLoading
   );
 
-  if (!isAllBackgroundsOpen) return null;
+  if (!isOpen) return null;
+
+  const baseClasses = `absolute top-1/2 trnsform -translate-y-1/2 right-16 max-h-[calc(100vh-75px)] w-74 z-40 ${DESIGN_TOKENS.colors.overlay} rounded-lg flex flex-col border border-gray-700 py-2 mb-10 mx-auto overflow-y-auto`;
+
+  const searchIconClasses = `w-4 h-4 absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400`;
+
+  const inputClasses = `bg-gray-700 text-white pl-8 w-full  pr-4 py-1.5  text-sm ${DESIGN_TOKENS.interactive.input}`;
+
+  const gridClasses = `grid grid-cols-2 gap-2 mb-2 p-3 overflow-y-auto`;
+
   return (
     <>
-      <div
-        className={`absolute top-1/2 trnsform -translate-y-1/2 right-16 max-h-[calc(100vh-75px)] w-74 z-40 ${DESIGN_TOKENS.colors.overlay} rounded-lg flex flex-col border border-gray-700 py-2 mb-10 mx-auto overflow-y-auto`}
-      >
+      <div className={baseClasses}>
         <BaseModal
-          isAllBackgroundsOpen={isAllBackgroundsOpen}
+          isAllBackgroundsOpen={isOpen}
           backBtn={true}
-          onReturntoLimited={onReturntoLimitedBackgrounds}
-          onClose={closeAllBackgrounds}
+          onGoBack={onGoBack}
+          onClose={closeModal}
           title={
             <>
               Photos by
@@ -64,15 +71,11 @@ const AllBackgroundsModal = ({
           }
         >
           <div className="relative p-3">
-            <Search className="w-4 h-4 absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search"
-              className={`bg-gray-700 text-white pl-8 w-full  pr-4 py-1.5  text-sm ${DESIGN_TOKENS.interactive.input}`}
-            />
+            <Search className={searchIconClasses} />
+            <input type="text" placeholder="Search" className={inputClasses} />
           </div>
 
-          <div className={`grid grid-cols-2 gap-2 mb-2 p-3 overflow-y-auto`}>
+          <div className={gridClasses}>
             {backgrounds.map((bg, index) => (
               <ImageBackgroundItem
                 key={index}
